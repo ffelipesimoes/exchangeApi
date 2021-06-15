@@ -2,7 +2,7 @@ module.exports = (req, res) => {
     
     const mongoose = require("mongoose");
     const connection = require("../../../src/config/dbconnection")
-    const userModel = require("../../../db/user");
+    const userModel = require("../models/user");
 
     const User = mongoose.model("User", userModel);
 
@@ -10,8 +10,8 @@ module.exports = (req, res) => {
 
     var email = req.params.email
 
-    /*
-    console.log(email)
+
+ 
     User.find({email : email}).then(a => {
 
        
@@ -20,9 +20,7 @@ module.exports = (req, res) => {
     }).catch(err => {
         console.log(err);
     })
-    */
+
 
    
-    User.find({email : email}).then(a => {res.json(a);}).catch(err => {console.log(err);})
-
 }

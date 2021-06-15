@@ -2,7 +2,7 @@ module.exports = (req, res) => {
 
     const mongoose = require("mongoose");
     const connection = require("../../../src/config/dbconnection");
-    const userModel = require("../../../db/user");
+    const userModel = require("../models/user");
 
     const User = mongoose.model("User", userModel);
 
