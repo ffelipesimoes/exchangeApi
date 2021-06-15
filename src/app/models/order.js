@@ -3,7 +3,9 @@ const mongoose = require("mongoose")
 const assets = ["BTC", "ETH", "ETH", "USD", "BRL"]
 
 const orderModel = new mongoose.Schema({
-  user: String,
+  buyer_name: String,
+  buyer_cpf: String,
+  buyer_address: String,
   type: {
     type: String,
     enum: {

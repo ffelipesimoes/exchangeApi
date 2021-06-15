@@ -9,6 +9,7 @@ module.exports = (req, res) => {
 
   //** Verificação se já existe usuário */
   const existingUser = User.findOne({ email: email })
+  console.log(existingUser)
   if (existingUser) {
     const err = new Error("E-mail já existe")
     err.statusCode = 422
