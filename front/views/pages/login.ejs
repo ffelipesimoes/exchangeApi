@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head'); %>
+
+    <script src="../../../front/controllers/login.js"></script>
+
+</head>
+<body class="container">
+
+<header>
+    <%- include('../partials/header'); %>
+</header>
+
+<main>
+    <div class="jumbotron">
+        <h1>Efetue Login</h1>
+        <p>Insira suas credenciais abaixo</p>
+
+      
+
+    <div class="form-floating mb-3">
+        <input type="email" class="form-control" id="email" placeholder="name@example.com">
+      
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" id="password" placeholder="Password">
+       
+        <br>
+
+        <button type="button" class="btn btn-dark" onclick="login()">Entrar</button>
+      </div>
+
+        
+
+
+    </div>
+</main>
+
+<footer>
+    <%- include('../partials/footer'); %>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</body>
+</html>
