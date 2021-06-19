@@ -1,5 +1,7 @@
 const app = require('./src/config/custom-express');
 
-app.listen(91, () => {
-    console.log("running");
+var port = process.env.PORT || 91;
+
+app.listen((port), () => {
+    console.log("running on port " + port);
 });

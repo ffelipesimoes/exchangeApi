@@ -1,11 +1,12 @@
 module.exports = (req, res) => {
+
   const mongoose = require("mongoose")
   const connection = require("../../../src/config/dbconnection")
   const userModel = require("../models/user")
 
   const User = mongoose.model("User", userModel)
 
-var { username,password, email, cpf, address, userType  } = req.body
+  var { username, password, email, cpf, address, userType } = req.body
 
   const usuario = new User({
     username: username,
@@ -27,5 +28,5 @@ var { username,password, email, cpf, address, userType  } = req.body
       console.log(err)
       res.sendStatus(406);
     })
-    
+
 }

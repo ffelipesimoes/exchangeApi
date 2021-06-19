@@ -6,13 +6,14 @@ module.exports = (req, res) => {
 
     const Order = mongoose.model("Order", orderModel);
     
-    var { user, type, asset, amount } = req.body;
+    var { user, type, amount, price, description } = req.body;
 
     const ordem = new Order({
         user: user,
         type: type,
-        asset: asset,
-        amount: amount
+        amount: amount,
+        price: price,
+        description : description
     });
 
     ordem.save().then(() => {

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose")
 var uniqueValidator = require('mongoose-unique-validator');
+var bcrypt = require('bcrypt-nodejs');
 
 const userModel = new mongoose.Schema({
   username: {
@@ -46,8 +47,27 @@ userType: {
 },
 }, { timestamps: true });
 
-userModel.plugin(uniqueValidator, { message: 'Usuário ou email já cadastrado' });
+userModel.plugin(uniqueValidator, { message: 'Usuário/email/CPF já cadastrado' });
 
+userModel.pre('save', function(next) {
+    var user = this;
+    if (!user.isModified('password')) return next();
+    bcrypt.genSalt(5, function(err, salt) {
+      if (err) return next(err);
+      bcrypt.hash(user.password, salt, null, function(err, hash) {
+        if (err) return next(err);
+        user.password = hash;
+        next();
+      });
+    });
+  });
+  //3
+  userModel.methods.verificaSenha = function(password, next) {
+    bcrypt.compare(password, this.password, function(err, isMatch) {
+      if (err) return next(err);
+      next(isMatch);
+    });
+  };
 
 
 module.exports = userModel
