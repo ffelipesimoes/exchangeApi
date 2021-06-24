@@ -18,6 +18,8 @@ const deleteUser = require("../controller/deleteUser");
 const updateUser = require("../controller/updateUser");
 
 const login = require("../controller/login");
+const auth = require("../controller/auth");
+
 
 
 routes.get("/orders",getOrders);
@@ -26,7 +28,7 @@ routes.delete("/order/:id",deleteOrder);
 routes.put("/order/:id",updateOrder);
 routes.get("/orders/buyorders", getBuyOrders);
 routes.get("/orders/sellorders", getSellOrders);
-routes.get("/orders/myOrders", getOrdersByUser);
+routes.get("/orders/myOrders",auth, getOrdersByUser);
 
 routes.get("/users",getUsers);
 routes.get("/user/:email",getUser);
@@ -34,7 +36,9 @@ routes.post("/user",postUser);
 routes.delete("/user/:id",deleteUser);
 routes.put("/user/:id",updateUser);
 
-routes.post("/login",login);
+routes.post("/login",auth, login);
+
+
 
 
 module.exports = routes;

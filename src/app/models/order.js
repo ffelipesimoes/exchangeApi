@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 
 const orderModel = new mongoose.Schema({
-  user: String,
+  username: String,
   type: {
     type: String,
     enum: {

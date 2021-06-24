@@ -1,47 +1,62 @@
-module.exports = (req, res) => {
+const auth = require("./auth");
+
+
+module.exports =  (req, res) => {
+
     const mongoose = require("mongoose")
     const connection = require("../../../src/config/dbconnection")
     const userModel = require("../models/user")
 
+    const jwt = require("jsonwebtoken");
+    const JWTSecret = "senhamuitodoida";
 
     const User = mongoose.model("User", userModel)
 
+    var { email, password } = req.body;
 
-    var jwt = require('jwt-simple')
-    var moment = require('moment')
-    var segredo = 'seusegredodetoken'
+    if (email != undefined) {
 
-    var username = req.body.username || '';
-    var password = req.body.password || '';
-    if (username == '' || password == '') {
-        return res.send(401);
+        var user = User.findOne({ email: email }, function (err, user) {
+            if (user != undefined) {
 
-    }
-    //1
-    User.findOne({ username: username }, function (err, user) {
-        if (err) {
 
-            return res.end(401)
-        }
-        //2
-        user.verificaSenha(password, function (isMatch) {
-            if (!isMatch) {
-                return res.send(401);
+                if (password == user.password) {
+                    jwt.sign({ username: user.username, email: user.email, tipo: user.userType }, JWTSecret, { expiresIn: "10h" }, (err, token) => {
+                        if (err) {
+                            res.status(400);
+                            res.json({ err: "Falha interna" });
+                        } else {
+
+
+                            res.status = 200;
+                       
+
+                            console.log()
+                            res.json(req.loggedUser);
+                            
+                       
+
+
+                        }
+                    });
+
+                } else {
+                    res.status = 401;
+                    res.json({ err: "Credenciais inválidas" });
+                }
+
+
+            } else {
+                res.status = 404;
+                res.json({ err: "Email  não existe!" });
             }
-            //3
-            var expires = moment().add(7, 'days').valueOf();
-            var token = jwt.encode({
-                iss: user.id,
-                exp: expires
-            }, segredo);
-            //4
-            return res.json({
-                token: token,
-                expires: expires,
-                user: user.toJSON()
-            });
+
         });
-    });
+
+    } else {
+        res.status = 400;
+        res.json({ err: "O email enviado é inválido" });
+    }
 
 
 }

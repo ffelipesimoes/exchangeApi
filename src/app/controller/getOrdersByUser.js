@@ -6,8 +6,8 @@ module.exports = (req, res) => {
 
     const Order = mongoose.model("Order", orderModel);
 
-    Order.find({user : req.body.user}).then(a => {
-        //console.log(a);
+    Order.find({username : req.loggedUser.username}).then(a => {
+       
         res.json(a);
     }).catch(err => {
         console.log(err);
