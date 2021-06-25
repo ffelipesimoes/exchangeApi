@@ -20,14 +20,19 @@ const updateUser = require("../controller/updateUser");
 const login = require("../controller/login");
 const auth = require("../controller/auth");
 
+const postBlock = require("../controller/postBlock");
+const getBlock = require("../controller/getBlock");
+const deleteBlock = require("../controller/deleteBlock");
 
-
+routes.get("/blocks",getBlock);
+routes.post("/block",postBlock);
+routes.delete("/block/:id",deleteBlock);
 routes.get("/orders",getOrders);
-routes.post("/order",postOrder);
+routes.post("/order",auth,postOrder);
 routes.delete("/order/:id",deleteOrder);
 routes.put("/order/:id",updateOrder);
 routes.get("/orders/buyorders", getBuyOrders);
-routes.get("/orders/sellorders", getSellOrders);
+routes.get("/orders/sellorders",auth, getSellOrders);
 routes.get("/orders/myOrders",auth, getOrdersByUser);
 
 routes.get("/users",getUsers);

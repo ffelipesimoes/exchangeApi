@@ -48,7 +48,7 @@ userType: {
 }, { timestamps: true });
 
 userModel.plugin(uniqueValidator, { message: 'Usuário/email/CPF já cadastrado' });
-
+/*
 userModel.pre('save', function(next) {
     var user = this;
     if (!user.isModified('password')) return next();
@@ -69,5 +69,6 @@ userModel.pre('save', function(next) {
     });
   };
 
+*/
 
 module.exports = userModel

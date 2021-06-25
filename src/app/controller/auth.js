@@ -24,6 +24,8 @@ module.exports = (req, res, next) => {
         req.token = token
         req.loggedUser = { username: data.username, email: data.email, tipo: data.tipo }
         console.log(data)
+
+
         next()
 
 

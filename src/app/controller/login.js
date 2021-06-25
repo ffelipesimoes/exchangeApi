@@ -1,7 +1,7 @@
 const auth = require("./auth");
 
 
-module.exports =  (req, res) => {
+module.exports = (req, res) => {
 
     const mongoose = require("mongoose")
     const connection = require("../../../src/config/dbconnection")
@@ -26,17 +26,11 @@ module.exports =  (req, res) => {
                             res.status(400);
                             res.json({ err: "Falha interna" });
                         } else {
-
-
                             res.status = 200;
-                       
-
-                            console.log()
-                            res.json(req.loggedUser);
-                            
-                       
-
-
+                            res.json({
+                                token: token,
+                                data: req.loggedUser
+                            });
                         }
                     });
 
@@ -45,18 +39,13 @@ module.exports =  (req, res) => {
                     res.json({ err: "Credenciais inválidas" });
                 }
 
-
             } else {
                 res.status = 404;
                 res.json({ err: "Email  não existe!" });
             }
-
         });
-
     } else {
         res.status = 400;
         res.json({ err: "O email enviado é inválido" });
     }
-
-
 }

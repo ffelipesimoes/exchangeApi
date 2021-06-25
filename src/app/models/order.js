@@ -13,6 +13,8 @@ const orderModel = new mongoose.Schema({
   amount: { type: Number },
   price: { type: Number },
   description: String,
+  isAddedOnBlock: Boolean,
+  block: Number,
   date: { type: Date, default: Date.now },
 })
 

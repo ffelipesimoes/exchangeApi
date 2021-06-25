@@ -1,3 +1,4 @@
+
 module.exports = (req, res) => {
     
     const mongoose = require("mongoose");
@@ -6,8 +7,9 @@ module.exports = (req, res) => {
 
     const Order = mongoose.model("Order", orderModel);
     
-    var { username, type, amount, price, description } = req.body;
-
+    var { type, amount, price, description } = req.body;
+    var username = req.loggedUser.username
+    
     const ordem = new Order({
         username: username,
         type: type,

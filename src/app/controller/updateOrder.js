@@ -7,13 +7,15 @@ module.exports = (req, res) => {
     const Order = mongoose.model("Order", orderModel);
 
    
-    var { user, type, asset, amount } = req.body;
+    var { type, amount, price, description } = req.body;
+    var username = req.loggedUser.username
 
     Order.findByIdAndUpdate(req.params.id, {
-        user: user,
+        username: username,
         type: type,
-        asset: asset,
         amount: amount,
+        price: price,
+        description : description
 
 
     }).then(() => {
