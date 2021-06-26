@@ -4,7 +4,8 @@ const userModel = require("../../src/app/models/user")
 
 mongoose.connect("mongodb://localhost:27017/orders", {
   useNewUrlParser: true,
-  useUnifiedTopology: true,
+  useUnifiedTopology: true
+
 });
 
 mongoose.connection.on('connected', () =>{

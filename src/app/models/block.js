@@ -2,7 +2,11 @@ const mongoose = require("mongoose")
 
 Schema = mongoose.Schema, autoIncrement = require('mongoose-auto-increment');
 
-var connection = mongoose.createConnection("mongodb://localhost:27017/orders");
+var connection = mongoose.createConnection("mongodb://localhost:27017/orders",{
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+
+});
 
 autoIncrement.initialize(connection);
 

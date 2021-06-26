@@ -30,7 +30,7 @@ routes.delete("/block/:id",deleteBlock);
 routes.get("/orders",getOrders);
 routes.post("/order",auth,postOrder);
 routes.delete("/order/:id",deleteOrder);
-routes.put("/order/:id",updateOrder);
+routes.put("/order/:id",auth,updateOrder);
 routes.get("/orders/buyorders", getBuyOrders);
 routes.get("/orders/sellorders",auth, getSellOrders);
 routes.get("/orders/myOrders",auth, getOrdersByUser);
